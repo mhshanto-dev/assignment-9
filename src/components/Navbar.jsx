@@ -9,8 +9,9 @@ const Navbar = () => {
 
   return (
     <nav className="border-b shadow-sm">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        {/* Left Side */}
+      <div className="container mx-auto flex items-center justify-between px-4 py-4">
+
+        {/* Left */}
         <div className="flex items-center">
           <button
             className="md:hidden mr-3"
@@ -24,8 +25,8 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex items-center gap-6 font-medium">
+        {/* Middle */}
+        <ul className="hidden md:flex gap-6">
           <li>
             <Link href="/">Home</Link>
           </li>
@@ -38,12 +39,27 @@ const Navbar = () => {
             <Link href="/add-room">Add Room</Link>
           </li>
         </ul>
+
+        {/* Right */}
+        <div className="hidden md:flex gap-3">
+          <Link href="/login">
+            <button className="border px-4 py-2 rounded">
+              Login
+            </button>
+          </Link>
+
+          <Link href="/register">
+            <button className="bg-blue-600 text-white px-4 py-2 rounded">
+              Register
+            </button>
+          </Link>
+        </div>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="md:hidden px-4 pb-4">
-          <ul className="flex flex-col gap-4 font-medium">
+          <ul className="flex flex-col gap-4">
             <li>
               <Link
                 href="/"
@@ -71,6 +87,26 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+
+          <div className="flex flex-col gap-3 mt-4">
+            <Link
+              href="/login"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <button className="w-full border px-4 py-2 rounded">
+                Login
+              </button>
+            </Link>
+
+            <Link
+              href="/register"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <button className="w-full bg-blue-600 text-white px-4 py-2 rounded">
+                Register
+              </button>
+            </Link>
+          </div>
         </div>
       )}
     </nav>
