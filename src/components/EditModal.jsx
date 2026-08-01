@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Envelope } from "@gravity-ui/icons";
 import { Button, Modal, Surface } from "@heroui/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const amenitiesList = [
   "WiFi",
@@ -16,6 +17,21 @@ const amenitiesList = [
 
 export function EditModalForm({ id, room }) {
   const [amenities, setAmenities] = useState([]);
+  const router = useRouter();
+   const [open, setOpen] = useState(false);
+  const {
+  image,
+  name,
+  description,
+  floor,
+  capacity,
+  price,
+  _id,
+  ownerName,
+  ownerEmail,
+  ownerImage,
+} = room;
+
 
   const handleAmenity = (item) => {
     if (amenities.includes(item)) {
@@ -33,15 +49,20 @@ export function EditModalForm({ id, room }) {
 
     addroom.amenities = amenities;
 
-    const res = await fetch("http://localhost:5000/add-room", {
-      method: "POST",
+    const res = await fetch(`http://localhost:5000/rooms/${_id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(addroom),
     });
-
     const data = await res.json();
+
+if (data.modifiedCount > 0) {
+  setOpen(false);    
+  router.refresh();
+}
+    
     console.log(data);
   };
 
@@ -69,13 +90,14 @@ export function EditModalForm({ id, room }) {
               <Surface variant="default">
                 <form
                   onSubmit={onSubmit}
-                  className="max-w-3xl mx-auto p-6 border rounded-lg space-y-5"
+                  className="max-w-2xl mx-auto p-6 border rounded-lg space-y-4"
                 >
                   <div>
-                    <label>Room Name</label>
+                    <label >Room Name</label>
                     <input
                       type="text"
                       name="name"
+                      defaultValue={name}
                       required
                       className="w-full border p-2 rounded mt-1"
                     />
@@ -87,6 +109,7 @@ export function EditModalForm({ id, room }) {
                       name="description"
                       rows="4"
                       required
+                      defaultValue={description}
                       className="w-full border p-2 rounded mt-1"
                     />
                   </div>
@@ -97,6 +120,7 @@ export function EditModalForm({ id, room }) {
                       type="url"
                       name="image"
                       required
+                      defaultValue={image}
                       className="w-full border p-2 rounded mt-1"
                     />
                   </div>
@@ -108,6 +132,7 @@ export function EditModalForm({ id, room }) {
                         type="number"
                         name="floor"
                         required
+                        defaultValue={floor}
                         className="w-full border p-2 rounded mt-1"
                       />
                     </div>
@@ -118,6 +143,7 @@ export function EditModalForm({ id, room }) {
                         type="number"
                         name="capacity"
                         required
+                        defaultValue={capacity}
                         className="w-full border p-2 rounded mt-1"
                       />
                     </div>
@@ -128,6 +154,7 @@ export function EditModalForm({ id, room }) {
                         type="number"
                         name="price"
                         required
+                        defaultValue={price}
                         className="w-full border p-2 rounded mt-1"
                       />
                     </div>
@@ -158,7 +185,7 @@ export function EditModalForm({ id, room }) {
                       type="submit"
                       className="bg-blue-600 text-white px-5 py-2 rounded"
                     >
-                      Add Room
+                      Save
                     </button>
 
                     <button
@@ -166,7 +193,7 @@ export function EditModalForm({ id, room }) {
                       onClick={() => setAmenities([])}
                       className="border px-5 py-2 rounded"
                     >
-                      Reset
+                      Cancel
                     </button>
                   </div>
                 </form>
@@ -174,10 +201,6 @@ export function EditModalForm({ id, room }) {
             </Modal.Body>
 
             <Modal.Footer>
-              <Button slot="close" variant="secondary">
-                Cancel
-              </Button>
-
               <Button slot="close">Close</Button>
             </Modal.Footer>
           </Modal.Dialog>
