@@ -12,6 +12,15 @@ const amenitiesList = [
 ];
 
 const AddNewRoomForm = () => {
+
+    const onSubmit = (e) =>{
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const addroom = Object.fromEntries(formData.entries());
+        console.log(addroom);
+
+    }
+
   const [amenities, setAmenities] = useState([]);
 
   const handleAmenity = (item) => {
@@ -22,30 +31,9 @@ const AddNewRoomForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const form = e.target;
-
-    const roomData = {
-      name: form.name.value,
-      description: form.description.value,
-      image: form.image.value,
-      floor: form.floor.value,
-      capacity: form.capacity.value,
-      price: form.price.value,
-      amenities,
-    };
-
-    console.log(roomData);
-
-    form.reset();
-    setAmenities([]);
-  };
-
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={onSubmit}
       className="max-w-3xl mx-auto p-6 border rounded-lg space-y-5"
     >
       <h2 className="text-2xl font-bold">Add New Room</h2>
