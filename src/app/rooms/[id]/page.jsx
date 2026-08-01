@@ -1,3 +1,4 @@
+import { EditModalForm } from "@/components/EditModal";
 import { Button } from "@heroui/react";
 import Image from "next/image";
 
@@ -26,9 +27,7 @@ const RoomDetailsPage = async ({ params }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
 
-    <div className="flex justify-end mx-auto">
-        <Button className='rounded-none mt-5 mb-3 ' variant="outline" href={`/edit-room/${id}`}>Edit</Button>
-    </div>
+        <EditModalForm id={id} room={room}></EditModalForm>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Side */}
