@@ -12,6 +12,14 @@ const RoomDetailsPage = async ({ params }) => {
 
   const room = await res.json();
 
+if (!room) {
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <h1 className="text-3xl font-bold">Room Not Found</h1>
+    </div>
+  );
+}
+
   const {
   image,
   name,
@@ -32,7 +40,7 @@ const RoomDetailsPage = async ({ params }) => {
      <div className="flex items-center gap-3 justify-end mt-5 mb-3">
       <EditModalForm id={id} room={room}></EditModalForm>
 
-        <DeleteAlert></DeleteAlert>
+        <DeleteAlert room={room}></DeleteAlert>
      </div>
        
 
