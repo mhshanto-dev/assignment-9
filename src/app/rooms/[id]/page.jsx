@@ -1,3 +1,4 @@
+import { DeleteAlert } from "@/components/DeleteAlert";
 import { EditModalForm } from "@/components/EditModal";
 import { Button } from "@heroui/react";
 import Image from "next/image";
@@ -25,9 +26,15 @@ const RoomDetailsPage = async ({ params }) => {
 } = room;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
 
-        <EditModalForm id={id} room={room}></EditModalForm>
+     <div className="max-w-7xl mx-auto px-4 py-10">
+   
+     <div className="flex items-center gap-3 justify-end mt-5 mb-3">
+      <EditModalForm id={id} room={room}></EditModalForm>
+
+        <DeleteAlert></DeleteAlert>
+     </div>
+       
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Side */}

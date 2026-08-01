@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Envelope } from "@gravity-ui/icons";
 import { Button, Modal, Surface } from "@heroui/react";
+import { Pencil } from "@gravity-ui/icons";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -68,11 +69,14 @@ if (data.modifiedCount > 0) {
 
   return (
     <Modal>
-      <div className="flex justify-end mx-auto">
-        
-        <Button className="rounded-none mt-5 mb-3" variant="outline" href={`/edit-room/${id}`}>Edit</Button>
-      </div>
-
+        <Button
+  className="rounded-none"
+  variant="outline"
+  href={`/edit-room/${id}`}
+>
+  <Pencil className="w-4 h-4 mr-2" />
+  Edit
+</Button>
       <Modal.Backdrop>
         <Modal.Container placement="auto">
           <Modal.Dialog className="sm:max-w-md">
