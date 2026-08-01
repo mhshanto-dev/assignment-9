@@ -20,7 +20,7 @@ const Navbar = () => {
             {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
           </button>
 
-          <Link href="/" className="text-2xl font-bold">
+          <Link href="/" className="text-xl font-bold tracking-tight text-indigo-600 dark:text-indigo-400">
             StudyNook
           </Link>
         </div>
