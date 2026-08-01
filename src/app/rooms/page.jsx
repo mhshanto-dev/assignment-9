@@ -1,3 +1,4 @@
+import RoomsCard from "@/components/RoomsCard";
 
 
 const roomsPage = async () => {
@@ -11,9 +12,7 @@ const roomsPage = async () => {
                 {
                     rooms.map((room) => (
                         <div key={room._id}>
-                            <h2>{room.name}</h2>
-                            <p>{room.description}</p>
-                            <p>{room.price}</p>
+                            <RoomsCard room={room}></RoomsCard>
                         </div>
                     ))
                 }
