@@ -1,3 +1,4 @@
+import { Button } from "@heroui/react";
 import Image from "next/image";
 
 const RoomDetailsPage = async ({ params }) => {
@@ -10,17 +11,25 @@ const RoomDetailsPage = async ({ params }) => {
   const room = await res.json();
 
   const {
-    image,
-    name,
-    description,
-    floor,
-    capacity,
-    price,
-    amenities,
-  } = room;
+  image,
+  name,
+  description,
+  floor,
+  capacity,
+  price,
+  amenities,
+  ownerName,
+  ownerEmail,
+  ownerImage,
+} = room;
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-10">
+
+    <div className="flex justify-end mx-auto">
+        <Button className='rounded-none mt-5 mb-3 ' variant="outline" href={`/edit-room/${id}`}>Edit</Button>
+    </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Side */}
         <div className="lg:col-span-2">
@@ -102,6 +111,37 @@ const RoomDetailsPage = async ({ params }) => {
               </p>
 
             </div>
+
+            {/* Owner Card */}
+<div className="border rounded-xl p-5 shadow mt-6">
+
+  <h3 className="text-gray-500 text-sm mb-4">
+    Listed By
+  </h3>
+
+  <div className="flex items-center gap-4">
+
+    <Image
+      src={room.ownerImage}
+      alt={room.ownerName}
+      width={60}
+      height={60}
+      className="rounded-full"
+    />
+
+    <div>
+      <h2 className="font-semibold text-lg">
+        {room.ownerName}
+      </h2>
+
+      <p className="text-gray-500 text-sm">
+        {room.ownerEmail}
+      </p>
+    </div>
+
+  </div>
+
+</div>
 
             <button className="w-full bg-blue-600 text-white py-3 rounded-lg mt-6">
               Book Now

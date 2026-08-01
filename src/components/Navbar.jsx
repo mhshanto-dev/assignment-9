@@ -42,6 +42,14 @@ const Navbar = () => {
 
         {/* Right */}
         <div className="hidden md:flex gap-3">
+            <Link
+              href="/profile"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <button className="w-full border px-4 py-2 rounded">
+                Profile
+              </button>
+            </Link>
           <Link href="/login">
             <button className="border px-4 py-2 rounded">
               Login
@@ -89,6 +97,14 @@ const Navbar = () => {
           </ul>
 
           <div className="flex flex-col gap-3 mt-4">
+            <Link
+              href="/profile"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <button className="w-full border px-4 py-2 rounded">
+                Profile
+              </button>
+            </Link>
             <Link
               href="/login"
               onClick={() => setIsMenuOpen(false)}
