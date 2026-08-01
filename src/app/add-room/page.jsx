@@ -13,12 +13,21 @@ const amenitiesList = [
 
 const AddNewRoomForm = () => {
 
-    const onSubmit = (e) =>{
+    const onSubmit = async (e) =>{
         e.preventDefault();
         const formData = new FormData(e.target);
         const addroom = Object.fromEntries(formData.entries());
         console.log(addroom);
-
+        const res = await fetch("http://localhost:5000/add-room", {
+        method: "POST",
+       headers: {
+      "Content-Type": "application/json",
+  },
+    body: JSON.stringify(addroom),
+})
+        const data = await res.json();
+        console.log(data);
+        
     }
 
   const [amenities, setAmenities] = useState([]);
