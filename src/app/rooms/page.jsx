@@ -1,9 +1,23 @@
 
 
-const roomsPage = () => {
+const roomsPage = async () => {
+    const res = await fetch("http://localhost:5000/rooms");
+    const rooms = await res.json();
+    console.log(rooms);
     return (
         <div>
-            rooms
+            <h1>All Rooms </h1>
+            <div>
+                {
+                    rooms.map((room) => (
+                        <div key={room._id}>
+                            <h2>{room.name}</h2>
+                            <p>{room.description}</p>
+                            <p>{room.price}</p>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     );
 };
