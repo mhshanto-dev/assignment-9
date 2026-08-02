@@ -51,6 +51,9 @@ const Navbar = () => {
           <li>
             <Link href="/add-room">Add Room</Link>
           </li>
+          <li>
+            <Link href="/my-bookings">MY Bookings</Link>
+          </li>
         </ul>
 
         {/* Right */}
@@ -113,11 +116,14 @@ const Navbar = () => {
               <Link href="/add-room" onClick={() => setIsMenuOpen(false)}>
                 Add Room
               </Link>
+              <li>
+            <Link href="/my-bookings">MY Bookings</Link>
+          </li>
             </li>
           </ul>
 
           <ul className="flex flex-col gap-3 mt-4">
-            <li>
+            <li className="text-sm text-gray-500">
               <Link href="/profile" onClick={() => setIsMenuOpen(false)}>
                 Profile
               </Link>
