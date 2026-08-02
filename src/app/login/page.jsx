@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 
-const RegisterPage = () => {
+const LoginPage = () => {
 
   const router = useRouter();
 
@@ -27,11 +27,9 @@ const RegisterPage = () => {
     const user = Object.fromEntries(formData.entries());
 
 
-    const {data, error} = await authClient.signUp.email({
+    const {data, error} = await authClient.signIn.email({
       email: user.email,
       password: user.password,
-      name: user.name,
-      image: user.image,
     });
 
 
@@ -51,31 +49,12 @@ if (error) {
         <div className="max-w-7xl mx-auto mt-4">
             <Card className="border rounded-none">
                 <div className="text-center my-3">
-                    <h1 className="text-center font-bold text-xl">Create Account</h1>
-                <p>Create an account to book quiet study spaces.</p>
+                    <h1 className="text-center font-bold text-xl">Login</h1>
+                <p>Already have an account?</p>
                 </div>
 
                 <Form  onSubmit={onSubmit} className="flex w-96 flex-col gap-4" >
 
-
-        <TextField
-        isRequired
-        name="name"
-        type="name"
-      >
-        <Label>Name</Label>
-        <Input placeholder="Type Your Name" />
-        <FieldError />
-      </TextField>
-        <TextField
-        isRequired
-        name="image"
-        type="url"
-      >
-        <Label>Image</Label>
-        <Input placeholder="Type Valid Image URL" />
-        <FieldError />
-      </TextField>
 
       <TextField
         isRequired
@@ -118,7 +97,7 @@ if (error) {
       <div className="flex gap-2 ">
         <Button type="submit">
           <Check />
-          Create
+          Login
         </Button>
         <Button type="reset" variant="secondary">
           Reset
@@ -130,4 +109,4 @@ if (error) {
     );
 };
 
-export default RegisterPage;
+export default LoginPage;
