@@ -59,7 +59,7 @@ const Navbar = () => {
           <Link href="/register">
             <button className="bg-blue-600 text-white px-4 py-2 rounded">
               Register
-            </button>
+            </button> 
           </Link>
         </div>
       </div>

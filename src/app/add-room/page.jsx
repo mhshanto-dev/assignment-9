@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
+import toast from "react-hot-toast";
 const amenitiesList = [
   "Wi-Fi",
   "Projector",
@@ -45,7 +45,8 @@ const AddNewRoomForm = () => {
     const data = await res.json();
 
     if (data.insertedId) {
-      alert("Room Added Successfully!");
+  toast.success("Room Added Successfully!");
+}
 
       e.target.reset();
       setAmenities([]);
