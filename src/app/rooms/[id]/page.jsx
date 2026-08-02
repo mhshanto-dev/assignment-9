@@ -10,7 +10,11 @@ import { EditModalForm } from "@/components/EditModal";
 const RoomDetailsPage = async ({ params }) => {
   const { id } = await params;
 
-  const res = await fetch(`http://localhost:5000/rooms/${id}`, {
+  const res = await fetch(`http://localhost:5000/rooms/${id}`,
+     {
+      headers: {
+        authorization: "logged in"
+      },
     cache: "no-store",
   });
 
