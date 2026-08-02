@@ -116,9 +116,11 @@ const Navbar = () => {
               <Link href="/add-room" onClick={() => setIsMenuOpen(false)}>
                 Add Room
               </Link>
-              <li>
-            <Link href="/my-bookings">MY Bookings</Link>
-          </li>
+            </li>
+            <li>
+              <Link href="/my-bookings" onClick={() => setIsMenuOpen(false)}>
+                MY Bookings
+              </Link>
             </li>
           </ul>
 
