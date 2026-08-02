@@ -1,3 +1,4 @@
+import { BookingCancelAlert } from "@/components/BookingCancel";
 import { auth } from "@/lib/auth";
 import { TrashBin } from "@gravity-ui/icons";
 import { Button } from "@heroui/react";
@@ -53,7 +54,8 @@ const MyBookings = async () => {
                                 <p className="text-sm text-gray-600 pt-2 border-t border-gray-100 mt-2">
                                     Room Price: <span className="font-medium">${booking.roomPrice}</span>
                                 </p>
-                                <Button className={'rounded-none border-red-500 text-red-500'} variant="outline" > <TrashBin/> Cancel Booking</Button>
+                                <BookingCancelAlert bookingId={booking._id}></BookingCancelAlert>
+                                
                             </div>
                         </div>
                     ))
