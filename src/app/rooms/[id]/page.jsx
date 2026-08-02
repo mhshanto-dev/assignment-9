@@ -1,7 +1,11 @@
+// import BookingCard from "@/components/BookingCard";
+// import { DeleteAlert } from "@/components/DeleteAlert";
+// import { EditModalForm } from "@/components/EditModal";
+import Image from "next/image";
+import BookingCard from "@/components/BookingCard";
 import { DeleteAlert } from "@/components/DeleteAlert";
 import { EditModalForm } from "@/components/EditModal";
-import { Button } from "@heroui/react";
-import Image from "next/image";
+
 
 const RoomDetailsPage = async ({ params }) => {
   const { id } = await params;
@@ -12,157 +16,74 @@ const RoomDetailsPage = async ({ params }) => {
 
   const room = await res.json();
 
-if (!room) {
-  return (
-    <div className="flex justify-center items-center h-screen">
-      <h1 className="text-3xl font-bold">Room Not Found</h1>
-    </div>
-  );
-}
+  if (!room) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <h1 className="text-3xl font-bold">Room Not Found</h1>
+      </div>
+    );
+  }
 
   const {
-  image,
-  name,
-  description,
-  floor,
-  capacity,
-  price,
-  amenities,
-  ownerName,
-  ownerEmail,
-  ownerImage,
-} = room;
+    image,
+    name,
+    description,
+    floor,
+    capacity,
+    price,
+    amenities,
+  } = room;
 
   return (
+    <div className="max-w-7xl mx-auto px-4 py-10">
+      {/* Action Buttons */}
+      <div className="mb-4 mt-5 flex justify-end gap-3">
+        <EditModalForm id={id} room={room} />
+        <DeleteAlert room={room} />
+      </div>
 
-     <div className="max-w-7xl mx-auto px-4 py-10">
-   
-     <div className="flex items-center gap-3 justify-end mt-5 mb-3">
-      <EditModalForm id={id} room={room}></EditModalForm>
+      {/* Top Image */}
+      <Image
+        src={image}
+        alt={name}
+        width={1200}
+        height={600}
+        className="h-[250px] w-full rounded-xl object-cover sm:h-[350px] lg:h-[500px]"
+      />
 
-        <DeleteAlert room={room}></DeleteAlert>
-     </div>
-       
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {/* Content + Booking Card */}
+      <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Left Side */}
         <div className="lg:col-span-2">
+          <h1 className="text-3xl font-bold lg:text-4xl">{name}</h1>
 
-          <Image
-            src={image}
-            alt={name}
-            width={800}
-            height={500}
-            className="w-full h-[450px] object-cover rounded-xl"
-          />
-
-          <h1 className="text-4xl font-bold mt-6">
-            {name}
-          </h1>
-
-          <p className="text-gray-600 mt-4">
+          <p className="mt-4 leading-7 text-gray-600">
             {description}
           </p>
 
-          <div className="grid grid-cols-3 gap-4 mt-8 border rounded-lg p-5">
-
-            <div className="text-center">
-              <h3 className="font-semibold">Floor</h3>
-              <p>{floor}</p>
-            </div>
-
-            <div className="text-center">
-              <h3 className="font-semibold">Capacity</h3>
-              <p>{capacity} Person</p>
-            </div>
-
-            <div className="text-center">
-              <h3 className="font-semibold">Price</h3>
-              <p>${price}/hr</p>
-            </div>
-
-          </div>
-
+          
+          {/* Amenities */}
           <div className="mt-8">
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="mb-4 text-2xl font-bold">
               Amenities
             </h2>
-
-            <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3">
               {amenities?.map((item, index) => (
                 <span
                   key={index}
-                  className="border rounded-full px-4 py-2"
+                  className="rounded-full border px-4 py-2"
                 >
                   {item}
                 </span>
               ))}
             </div>
+            
           </div>
         </div>
 
         {/* Right Side */}
         <div>
-
-          <div className="border rounded-xl p-6 shadow">
-
-            <h2 className="text-4xl font-bold text-blue-600">
-              ${price}
-            </h2>
-
-            <p className="text-gray-500 mb-6">
-              Per Hour
-            </p>
-
-            <div className="space-y-3">
-
-              <p>
-                <strong>Floor:</strong> {floor}
-              </p>
-
-              <p>
-                <strong>Capacity:</strong> {capacity} Person
-              </p>
-
-            </div>
-
-            {/* Owner Card */}
-<div className="border rounded-xl p-5 shadow mt-6">
-
-  <h3 className="text-gray-500 text-sm mb-4">
-    Listed By
-  </h3>
-
-  <div className="flex items-center gap-4">
-
-    <Image
-      src={room.ownerImage}
-      alt={room.ownerName}
-      width={60}
-      height={60}
-      className="rounded-full"
-    />
-
-    <div>
-      <h2 className="font-semibold text-lg">
-        {room.ownerName}
-      </h2>
-
-      <p className="text-gray-500 text-sm">
-        {room.ownerEmail}
-      </p>
-    </div>
-
-  </div>
-
-</div>
-
-            <button className="w-full bg-blue-600 text-white py-3 rounded-lg mt-6">
-              Book Now
-            </button>
-
-          </div>
-
+          <BookingCard room={room} />
         </div>
       </div>
     </div>
