@@ -1,4 +1,5 @@
 "use client";
+import {FcGoogle} from "react-icons/fc";
 import { authClient } from "@/lib/auth-client";
 import { Check } from "@gravity-ui/icons";
 import {
@@ -8,6 +9,7 @@ import {
   Form,
   Input,
   Label,
+  Separator,
   TextField
 } from "@heroui/react";
 import { Card } from "@heroui/react";
@@ -46,6 +48,13 @@ if (error) {
 
   };
   
+  const handleGoogleSignIn =async () =>{
+    await authClient.signIn.social(
+      {
+        provider: "google",
+      }
+    );
+  }
 
     return (
         <div className="max-w-7xl mx-auto mt-4">
@@ -125,8 +134,17 @@ if (error) {
         </Button>
       </div>
     </Form>
+            <div className="flex items-center my-4">
+  <div className="flex-1 border-t"></div>
+
+  <span className="mx-3 text-sm text-gray-500 whitespace-nowrap">
+    Or Sign Up With
+  </span>
+
+  <div className="flex-1 border-t"></div>
+</div>
           <div>
-            <Button className={'w-full'}>Sign In With Google</Button>
+            <Button onClick={handleGoogleSignIn} variant="outline" className={'w-full'}> <FcGoogle /> Sign In With Google</Button>
           </div>
             </Card>
         </div>
