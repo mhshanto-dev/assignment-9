@@ -1,3 +1,207 @@
+# 📚 StudyNook
+
+StudyNook is a modern study room booking platform where users can browse available study rooms, book rooms, and manage their bookings. It provides secure authentication, room management, and a responsive user experience.
+
+## 🚀 Live Demo
+
+- 🌐 Frontend: https://studynook-client-bice.vercel.app/
+- ⚙️ Backend: https://studynook-server-v2.vercel.app/
+
+---
+
+## ✨ Features
+
+### 👤 Authentication
+- Email & Password Authentication
+- Google Sign In
+- Protected Routes
+- Secure Session Management using Better Auth
+
+### 📖 Study Room Management
+- Browse all study rooms
+- View room details
+- Search rooms
+- Add new room (Authorized users)
+- Edit room
+- Delete room
+
+### 📅 Booking System
+- Book study rooms
+- View My Bookings
+- Cancel booking
+- Booking validation
+
+### 🎨 User Experience
+- Fully Responsive Design
+- Loading States
+- Toast Notifications
+- Beautiful UI with HeroUI
+- Optimized Images
+- Modern Layout
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+- Next.js 16
+- React 19
+- Tailwind CSS
+- HeroUI
+- React Icons
+- Better Auth Client
+
+## Backend
+
+- Node.js
+- Express.js
+- MongoDB
+- Better Auth
+- MongoDB Native Driver
+
+## Deployment
+
+- Vercel (Frontend)
+- Vercel / Render (Backend)
+- MongoDB Atlas
+
+---
+
+# 📂 Folder Structure
+
+```
+studyook/
+│
+├── app/
+├── components/
+├── lib/
+├── public/
+├── hooks/
+├── utils/
+├── middleware.js
+└── ...
+```
+
+---
+
+# 🔐 Environment Variables
+
+## Frontend (.env)
+
+```env
+NEXT_PUBLIC_API_URL=
+BETTER_AUTH_URL=
+```
+
+## Backend (.env)
+
+```env
+MONGODB_URI=
+BETTER_AUTH_SECRET=
+BETTER_AUTH_URL=
+CLIENT_URL=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+```
+
+---
+
+# ⚙️ Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/yourusername/studynook.git
+```
+
+## Frontend
+
+```bash
+cd studyook
+npm install
+npm run dev
+```
+
+## Backend
+
+```bash
+cd studyook-server
+npm install
+npm run dev
+```
+
+---
+
+# 📦 Packages Used
+
+### Frontend
+
+- next
+- react
+- tailwindcss
+- heroui
+- react-icons
+- better-auth
+- motion
+
+### Backend
+
+- express
+- mongodb
+- better-auth
+- cors
+- dotenv
+
+---
+
+# 🔒 Authentication
+
+- Better Auth
+- Google OAuth
+- Session Authentication
+- Protected API Routes
+
+---
+
+# 📱 Responsive
+
+- Mobile
+- Tablet
+- Laptop
+- Desktop
+
+---
+
+# 🌍 Deployment
+
+### Frontend
+
+Hosted on **Vercel**
+
+### Backend
+
+Hosted on **Vercel / Render**
+
+### Database
+
+MongoDB Atlas
+
+---
+
+# 👨‍💻 Author
+
+**Mehedi Hasan Shanto**
+
+- GitHub: https://github.com/YOUR_GITHUB_USERNAME
+- Portfolio: https://mhshanto-dev.vercel.app
+
+---
+
+# 📄 License
+
+This project is licensed under the MIT License.
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
