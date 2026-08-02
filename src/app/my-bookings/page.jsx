@@ -1,4 +1,6 @@
 import { auth } from "@/lib/auth";
+import { TrashBin } from "@gravity-ui/icons";
+import { Button } from "@heroui/react";
 import { headers } from "next/headers";
 import Image from "next/image";
 
@@ -17,7 +19,7 @@ const MyBookings = async () => {
 
 
     return (
-        <div className='max-w-7xl mx-auto px-4 py-10'>
+        <div className='min-w-3xl mx-auto px-4 py-10'>
             <h2 className="text-3xl font-bold mb-8">My Bookings</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -40,17 +42,18 @@ const MyBookings = async () => {
                                 <h3 className="text-lg font-semibold text-gray-800">
                                     {booking.roomName}
                                 </h3>
-
                                 <div className="flex items-center justify-between text-sm text-gray-500">
-                                    <span>Room ID: {booking.roomId}</span>
+                                    <span>Booked by: {booking.userName}</span>
                                     <span className="bg-gray-100 px-2 py-0.5 rounded-full text-xs font-medium">
                                         Floor {booking.roomFloor}
                                     </span>
                                 </div>
+                                
 
                                 <p className="text-sm text-gray-600 pt-2 border-t border-gray-100 mt-2">
-                                    Departure: <span className="font-medium">{booking.departureDate}</span>
+                                    Room Price: <span className="font-medium">${booking.roomPrice}</span>
                                 </p>
+                                <Button className={'rounded-none border-red-500 text-red-500'} variant="outline" > <TrashBin/> Cancel Booking</Button>
                             </div>
                         </div>
                     ))
