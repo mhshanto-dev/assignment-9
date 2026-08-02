@@ -1,42 +1,48 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { TrashBin } from "@gravity-ui/icons";
 import { AlertDialog, Button } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-export function BookingCancelAlert({ bookingId }) {
-//   const router = useRouter();
-
-//   const { _id, name } = room;
+export function BookingCancelAlert({ bookingId, roomName }) {
+  const router = useRouter();
 
   const handleDelete = async () => {
+    const { data: tokenData } = await authClient.token();
+
     try {
-      const res = await fetch(`http://localhost:5000/bookings/${bookingId}`, {
-        method: "DELETE", headers: {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings/${bookingId}`, {
+        method: "DELETE",
+        headers: {
           "Content-Type": "application/json",
-        }
+          authorization: `Bearer ${tokenData?.token}`,
+        },
       });
 
       const data = await res.json();
-      console.log(data);
 
       if (data.deletedCount > 0) {
-        toast.success("Booking cancel successfully!");
-        window.location.reload();
-        router.replace("/rooms");
+        toast.success("Booking cancelled successfully!");
         router.refresh();
       } else {
         toast.error("Delete failed!");
       }
     } catch (error) {
-    //   toast.error("Something went wrong!");
+      toast.error("Something went wrong!");
+      console.error(error);
     }
   };
 
   return (
     <AlertDialog>
-      <Button className={'rounded-none border-red-500 text-red-500'} variant="outline" > <TrashBin/> Cancel Booking</Button>
+      <Button
+        className="rounded-none border-red-500 text-red-500"
+        variant="outline"
+      >
+        <TrashBin /> Cancel Booking
+      </Button>
 
       <AlertDialog.Backdrop>
         <AlertDialog.Container>
@@ -52,8 +58,8 @@ export function BookingCancelAlert({ bookingId }) {
 
             <AlertDialog.Body>
               <p>
-                This will permanently Cancel{" "}
-                <strong>{name}</strong>.
+                This will permanently cancel{" "}
+                <strong>{roomName}</strong>.
                 <br />
                 This action cannot be undone.
               </p>
@@ -74,4 +80,3 @@ export function BookingCancelAlert({ bookingId }) {
     </AlertDialog>
   );
 }
-

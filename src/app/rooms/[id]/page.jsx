@@ -12,7 +12,7 @@
 //     headers: await headers(),
 //   });
 
-//   const res = await fetch(`http://localhost:5000/rooms/${id}`,
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${id}`,
 //      {
 //       headers: {
 //         authorization: `Bearer ${token}`,
@@ -123,12 +123,11 @@ const RoomDetailsPage = async ({ params }) => {
     );
   }
 
-  const tokenRes = await fetch("http://localhost:3000/api/auth/token", {
+  const { token } = await auth.api.getToken({
     headers: reqHeaders,
   });
-  const { token } = await tokenRes.json();
 
-  const res = await fetch(`http://localhost:5000/rooms/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${id}`, {
     headers: {
       authorization: `Bearer ${token}`,
     },

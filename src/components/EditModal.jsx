@@ -50,7 +50,7 @@ export function EditModalForm({ id, room }) {
 
     addroom.amenities = amenities;
 
-    const res = await fetch(`http://localhost:5000/rooms/${_id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms/${_id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

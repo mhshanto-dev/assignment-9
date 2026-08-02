@@ -34,7 +34,7 @@ const AddNewRoomForm = () => {
     // Add amenities
     addroom.amenities = amenities;
 
-    const res = await fetch("http://localhost:5000/add-room", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/add-room`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

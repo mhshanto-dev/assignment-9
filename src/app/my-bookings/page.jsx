@@ -9,12 +9,30 @@ import Image from "next/image";
 const MyBookings = async () => {
     const session = await auth.api.getSession({
         headers: await headers(),
-    })
-    const user = session?.user
+    }); 
+
+    if (!session) {
+        return (
+            <div className="flex h-screen items-center justify-center">
+                <h1 className="text-3xl font-bold">Please login to view this page</h1>
+            </div>
+        );
+    }
+
+    const tokenRes = await auth.api.getToken({
+        headers: await headers(),
+    });
+    const token = tokenRes?.token;
+
+    const user = session?.user;
     console.log(user);
 
 
-    const res = await fetch(`http://localhost:5000/bookings/${user?.id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings/${user?.id}`,{
+        headers: {
+            authorization: `Bearer ${token}`,
+        },
+    });
     const bookings = await res.json();
     console.log(bookings);
 
@@ -25,7 +43,7 @@ const MyBookings = async () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {
-                    bookings.map((booking) => (
+                    Array.isArray(bookings) && bookings.map((booking) => (
                         <div
                             key={booking._id}
                             className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-100"

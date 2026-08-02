@@ -14,13 +14,14 @@ export const auth = betterAuth({
     client,
   }),
 
+  trustedOrigins: ["http://localhost:3000", "https://studynook-client-bice.vercel.app"],
   emailAndPassword: {
     enabled: true,
   },
   socialProviders: {
         google: { 
             clientId: process.env.GOOGLE_CLIENTID, 
-            clientSecret: process.env.GOOGLR_SECRET, 
+            clientSecret: process.env.GOOGLE_SECRET, 
         }, 
     },
     session: {

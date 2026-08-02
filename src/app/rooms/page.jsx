@@ -9,7 +9,7 @@ const RoomsPage = async ({ searchParams }) => {
   console.log("Search:", search);
 
   const res = await fetch(
-    `http://localhost:5000/rooms?search=${encodeURIComponent(search)}`,
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/rooms?search=${encodeURIComponent(search)}`,
     {
       cache: "no-store",
     }
@@ -49,7 +49,7 @@ export default RoomsPage;
 
 
 // const roomsPage = async () => {
-//     const res = await fetch("http://localhost:5000/rooms");
+//     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms`);
 //     const rooms = await res.json();
 //     console.log(rooms);
 //     return (
@@ -79,7 +79,7 @@ export default RoomsPage;
 //   const search = searchParams?.search || "";
 
 //   const res = await fetch(
-//     `http://localhost:5000/rooms?search=${search}`,
+//     `${process.env.NEXT_PUBLIC_SERVER_URL}/rooms?search=${search}`,
 //     {
 //       cache: "no-store",
 //     }
