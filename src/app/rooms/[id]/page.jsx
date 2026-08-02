@@ -5,15 +5,20 @@ import Image from "next/image";
 import BookingCard from "@/components/BookingCard";
 import { DeleteAlert } from "@/components/DeleteAlert";
 import { EditModalForm } from "@/components/EditModal";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 
 const RoomDetailsPage = async ({ params }) => {
   const { id } = await params;
+  const {token} = await auth.api.getToken({
+    headers: await headers(),
+  });
 
   const res = await fetch(`http://localhost:5000/rooms/${id}`,
      {
       headers: {
-        authorization: "logged in"
+        authorization: `Bearer ${token}`,
       },
     cache: "no-store",
   });
