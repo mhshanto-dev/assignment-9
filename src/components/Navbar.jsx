@@ -1,5 +1,5 @@
 "use client";
-
+import ThemeToggle from "@/components/ThemeToggle";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -20,158 +20,235 @@ const Navbar = () => {
     router.push("/login");
   };
 
+  const navLinks = (
+    <>
+      <li>
+        <Link
+          href="/"
+          className="font-medium transition-colors duration-200 hover:text-primary"
+        >
+          Home
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/rooms"
+          className="font-medium transition-colors duration-200 hover:text-primary"
+        >
+          Rooms
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/add-room"
+          className="font-medium transition-colors duration-200 hover:text-primary"
+        >
+          Add Room
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/my-bookings"
+          className="font-medium transition-colors duration-200 hover:text-primary"
+        >
+          My Bookings
+        </Link>
+      </li>
+    </>
+  );
+
   return (
-    <nav className="border-b shadow-sm items-center justify-between">
-      <div className="container items-center justify-between mx-auto flex px-4 py-4">
-        {/* Left */}
-        <div className="flex items-center">
+    <nav className="sticky top-0 z-50 border-b bg-base-100/90 backdrop-blur shadow-sm">
+      <div className="container mx-auto flex items-center justify-between px-4 py-4">
+        {/* Logo */}
+        <div className="flex items-center gap-3">
           <button
-            className="md:hidden mr-3"
+            className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            {isMenuOpen ? <FiX size={26} /> : <FiMenu size={26} />}
           </button>
 
           <Link
             href="/"
-            className="text-xl font-bold tracking-tight text-indigo-600 dark:text-indigo-400"
+            className="text-2xl font-bold text-primary tracking-tight"
           >
             StudyNook
           </Link>
         </div>
 
-        {/* Middle */}
-        <ul className="hidden md:flex gap-6">
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            <Link href="/rooms">Rooms</Link>
-          </li>
-          <li>
-            <Link href="/add-room">Add Room</Link>
-          </li>
-          <li>
-            <Link href="/my-bookings">MY Bookings</Link>
-          </li>
-        </ul>
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex items-center gap-8">{navLinks}</ul>
 
-        {/* Right */}
-        <div className="hidden md:flex items-center gap-3">
+        {/* Desktop Right */}
+        <div className="hidden md:flex items-center gap-4">
+          <ThemeToggle />
+
           {user ? (
-            <ul className="flex items-center gap-3">
-              <li>
-                <Link href="/profile">
-                  <Avatar>
-                    <Avatar.Image
-                      referrerPolicy="no-referrer"
-                      alt={user.name}
-                      src={user?.image}
-                    />
-                    <Avatar.Fallback>
-                      {user.name?.charAt(0)}
-                    </Avatar.Fallback>
-                  </Avatar>
-                </Link>
-              </li>
-              <li>
-                <Button
-                  size="sm"
-                  onClick={handleSignOut}
-                  variant="danger"
-                  className="rounded-none"
-                >
-                  Logout
-                </Button>
-              </li>
-            </ul>
+            <>
+              <Link href="/profile">
+                <Avatar className="cursor-pointer">
+                  <Avatar.Image
+                    referrerPolicy="no-referrer"
+                    src={user.image}
+                    alt={user.name}
+                  />
+                  <Avatar.Fallback>
+                    {user.name?.charAt(0)}
+                  </Avatar.Fallback>
+                </Avatar>
+              </Link>
+
+              <Button
+                color="danger"
+                radius="full"
+                size="sm"
+                onClick={handleSignOut}
+              >
+                Logout
+              </Button>
+            </>
           ) : (
-            <ul className="flex items-center gap-3">
-              <li>
-                <Link href="/login">Login</Link>
-              </li>
-              <li>
-                <Link href="/signup">Sign Up</Link>
-              </li>
-            </ul>
+            <>
+              <Link href="/login">
+                <Button variant="bordered" radius="full">
+                  Login
+                </Button>
+              </Link>
+
+              <Link href="/signup">
+                <Button color="primary" radius="full">
+                  Sign Up
+                </Button>
+              </Link>
+            </>
           )}
+        </div>
+
+        {/* Mobile Right (theme toggle always visible, even before menu opens) */}
+        <div className="md:hidden">
+          <ThemeToggle />
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden px-4 pb-4">
-          <ul className="flex flex-col gap-4">
+        <div className="md:hidden border-t bg-base-100 px-4 py-5 shadow-lg">
+          <ul className="flex flex-col gap-5">
             <li>
-              <Link href="/" onClick={() => setIsMenuOpen(false)}>
+              <Link
+                href="/"
+                onClick={() => setIsMenuOpen(false)}
+                className="font-medium hover:text-primary"
+              >
                 Home
               </Link>
             </li>
+
             <li>
-              <Link href="/rooms" onClick={() => setIsMenuOpen(false)}>
+              <Link
+                href="/rooms"
+                onClick={() => setIsMenuOpen(false)}
+                className="font-medium hover:text-primary"
+              >
                 Rooms
               </Link>
             </li>
+
             <li>
-              <Link href="/add-room" onClick={() => setIsMenuOpen(false)}>
+              <Link
+                href="/add-room"
+                onClick={() => setIsMenuOpen(false)}
+                className="font-medium hover:text-primary"
+              >
                 Add Room
               </Link>
             </li>
+
             <li>
-              <Link href="/my-bookings" onClick={() => setIsMenuOpen(false)}>
-                MY Bookings
+              <Link
+                href="/my-bookings"
+                onClick={() => setIsMenuOpen(false)}
+                className="font-medium hover:text-primary"
+              >
+                My Bookings
               </Link>
             </li>
           </ul>
 
-          <ul className="flex flex-col gap-3 mt-4">
-            <li className="text-sm text-gray-500">
-              <Link href="/profile" onClick={() => setIsMenuOpen(false)}>
-                Profile
-              </Link>
-            </li>
-
+          <div className="mt-6 border-t pt-5">
             {user ? (
               <>
-                <li className="flex items-center gap-2">
+                <div className="flex items-center gap-3 mb-5">
                   <Avatar>
                     <Avatar.Image
                       referrerPolicy="no-referrer"
+                      src={user.image}
                       alt={user.name}
-                      src={user?.image}
                     />
                     <Avatar.Fallback>
                       {user.name?.charAt(0)}
                     </Avatar.Fallback>
                   </Avatar>
-                  <span>{user.name}</span>
-                </li>
-                <li>
+
+                  <div>
+                    <h4 className="font-semibold">{user.name}</h4>
+                    <p className="text-xs text-gray-500">{user.email}</p>
+                  </div>
+                </div>
+
+                <Link
+                  href="/profile"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   <Button
-                    size="sm"
-                    onClick={handleSignOut}
-                    variant="danger"
-                    className="rounded-none w-full"
+                    variant="bordered"
+                    radius="full"
+                    className="w-full mb-3"
                   >
-                    Logout
+                    Profile
                   </Button>
-                </li>
+                </Link>
+
+                <Button
+                  color="danger"
+                  radius="full"
+                  className="w-full"
+                  onClick={handleSignOut}
+                >
+                  Logout
+                </Button>
               </>
             ) : (
-              <>
-                <li>
-                  <Link href="/login" onClick={() => setIsMenuOpen(false)}>
+              <div className="grid grid-cols-2 gap-3">
+                <Link
+                  href="/login"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Button
+                    variant="bordered"
+                    radius="full"
+                    className="w-full"
+                  >
                     Login
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/signup" onClick={() => setIsMenuOpen(false)}>
+                  </Button>
+                </Link>
+
+                <Link
+                  href="/signup"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <Button
+                    color="primary"
+                    radius="full"
+                    className="w-full"
+                  >
                     Sign Up
-                  </Link>
-                </li>
-              </>
+                  </Button>
+                </Link>
+              </div>
             )}
-          </ul>
+          </div>
         </div>
       )}
     </nav>

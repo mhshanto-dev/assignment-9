@@ -25,13 +25,13 @@ const Banner = () => {
         {/* Buttons */}
         <div className="mt-8 flex justify-center gap-4">
           <Link href="/rooms">
-            <button className="bg-blue-600 text-white px-6 py-3 rounded-md">
+            <button className="bg-blue-300 text-black font-bold px-6 py-3 rounded-md hover:bg-blue-700 transition-colors duration-200">
               Explore Rooms
             </button>
           </Link>
 
           <Link href="/add-room">
-            <button className="border px-6 py-3 rounded-md">
+            <button  className=" bg-blue-300 font-bold text-black px-6 py-3 rounded-md hover:bg-blue-700 transition-colors duration-200">
               List Your Room
             </button>
           </Link>
