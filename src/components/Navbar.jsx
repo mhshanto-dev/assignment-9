@@ -71,7 +71,7 @@ const Navbar = () => {
 
           <Link
             href="/"
-            className="text-2xl font-bold text-primary tracking-tight"
+            className="text-xl font-bold tracking-tight text-indigo-600 dark:text-indigo-400"
           >
             StudyNook
           </Link>
@@ -100,7 +100,8 @@ const Navbar = () => {
               </Link>
 
               <Button
-                color="danger"
+      
+                variant="outline"
                 radius="full"
                 size="sm"
                 onClick={handleSignOut}
@@ -111,7 +112,7 @@ const Navbar = () => {
           ) : (
             <>
               <Link href="/login">
-                <Button variant="bordered" radius="full">
+                <Button color="primary" radius="full">
                   Login
                 </Button>
               </Link>
